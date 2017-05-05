@@ -10,7 +10,7 @@ public class LinkAnalysis {
         int linkCounter = 0;
 
         //Go through all the nodes and create links between all other nodes
-        for(int originNodeInc = 0;originNodeInc < nodesToCreateLinksFrom.size();originNodeInc++){
+        for(int originNodeInc = 0;originNodeInc < nodesToCreateLinksFrom.size() || originNodeInc < 8;originNodeInc++){
             //Set our origin  node
             PortalNode originNode = nodesToCreateLinksFrom.get(originNodeInc);
 
@@ -40,29 +40,6 @@ public class LinkAnalysis {
         }
 
         Ingress.PrintLn(linkCounter + " links created!");
-    }
-
-    //Check the links for any intersections and remove them
-    public static void RemoveLinkIntersections(ArrayList<Link> linksToCheck){
-        //Go through all links and remove intersections
-        for(int intersectingLink = linksToCheck.size() - 1;intersectingLink > -1;intersectingLink--){
-            //Check if we are null
-            if(linksToCheck.get(intersectingLink) == null){
-                continue;
-            }
-
-            //Go through all elements in the link list
-            for(int link = 0;link < linksToCheck.size();link++) {
-                Link link1 = linksToCheck.get(intersectingLink);
-                Link link2 = linksToCheck.get(link);
-                //check if we are intersecting
-                if(!IntersectionPossible(link1, link2)) {
-                    linksToCheck.remove(intersectingLink);
-                    Ingress.PrintLn(intersectingLink + "Removing intersection");
-                    break;
-                }
-            }
-        }
     }
 
     public static boolean IntersectionPossible(Link link1, Link link2){
